@@ -57,8 +57,6 @@ services:
      - .env
     ports:
       - ${POSTGRES_PORT}:5432
-    networks:
-      - https_proxy
     volumes:
       - ${POSTGRES_PATH}:/var/lib/postgresql/data
 ```
