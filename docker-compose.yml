@@ -8,15 +8,6 @@ services:
      - .env
     ports:
       - ${PRISMA_STUDIO_PORT}:5555
-    networks:
-      - https_proxy
-    labels:
-      traefik.enable: 'true'
-      traefik.http.routers.prisma-studio.rule: Host(`prisma-studio.vaticanarchives.org`)
-      traefik.http.routers.prisma-studio.entrypoints: websecure
-      traefik.http.routers.prisma-studio.service: prisma-studio
-      traefik.http.routers.prisma-studio.tls: 'true'
-      traefik.http.services.prisma-studio.loadbalancer.server.port: 5555
   postgres:
     container_name: prisma-postgres
     image: postgres:alpine
@@ -29,6 +20,3 @@ services:
       - https_proxy
     volumes:
       - ${POSTGRES_PATH}:/var/lib/postgresql/data
-networks:
-  https_proxy:
-    external: true

@@ -38,6 +38,31 @@ Prisma Studio is then made available at the port specified to display your data 
 
 Use the included docker-compose.yml file as a base for your installation.
 
+```dockerfile
+version: '3.7'
+services:
+  prisma-studio:
+    container_name: prisma-studio
+    image: timothyjmiller/prisma-studio:latest
+    restart: unless-stopped
+    env_file:
+     - .env
+    ports:
+      - ${PRISMA_STUDIO_PORT}:5555
+  postgres:
+    container_name: prisma-postgres
+    image: postgres:alpine
+    restart: always
+    env_file:
+     - .env
+    ports:
+      - ${POSTGRES_PORT}:5432
+    networks:
+      - https_proxy
+    volumes:
+      - ${POSTGRES_PATH}:/var/lib/postgresql/data
+```
+
 ## 📁 Environment Variables
 
 ### ⚠️ Warning
