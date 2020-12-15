@@ -2,6 +2,11 @@
 
 Access Prisma Studio through your web browser.
 
+## Best Security Practices
+
+- Host your different postgres environments in separate docker containers!
+- Share database access on a per environment basis
+
 Useful for sharing multiple database environments' access with colleagues. Can be deployed via Traefik for global access.
 
 For advanced deployments and/or consulting, [email me](mailto:contact@preparesoftware.com?subject=[GitHub%20Consulting]%20docker-prisma-studio) or [contact me on Discord](https://discord.gg/gtF4AX9UGA)
@@ -57,10 +62,13 @@ services:
      - .env
     ports:
       - ${POSTGRES_PORT}:5432
-    networks:
-      - https_proxy
     volumes:
-      - ${POSTGRES_PATH}:/var/lib/postgresql/data
+      - ${POSTGRES_PATH}/${PROJECT_NAME}/${POSTGRES_DATABASE}/:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 ```
 
 ## 📁 Environment Variables
@@ -74,6 +82,7 @@ Make sure you securely generate new passwords for your postgres database for use
 2. Give ```.env``` the following contents:
 
 ```bash
+PROJECT_NAME=demo-project
 POSTGRES_DATABASE=development
 POSTGRES_HOST=postgres
 POSTGRES_USERNAME=postgres
