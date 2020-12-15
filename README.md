@@ -6,6 +6,12 @@ Useful for sharing multiple database environments' access with colleagues. Can b
 
 For advanced deployments and/or consulting, [email me](mailto:contact@preparesoftware.com?subject=[GitHub%20Consulting]%20docker-prisma-studio) or [contact me on Discord](https://discord.gg/gtF4AX9UGA)
 
+## 📊 Stats
+
+| Size  | Downloads | Discord |
+| ------------- | ------------- | ------------- |
+| [![prisma-studio docker image size](https://img.shields.io/docker/image-size/timothyjmiller/prisma-studio?style=flat-square)](https://hub.docker.com/r/timothyjmiller/prisma-studio "prisma-studio docker image size")  | [![Total DockerHub pulls](https://img.shields.io/docker/pulls/timothyjmiller/prisma-studio?style=flat-square)](https://hub.docker.com/r/timothyjmiller/prisma-studio "Total DockerHub pulls")  | [![Official Discord Server](https://img.shields.io/discord/788313754181173259?style=flat-square)](https://discord.gg/gtF4AX9UGA "Official Discord Server")
+
 ## ⁉️ How Private & Secure?
 
 1. Alpine Linux base image

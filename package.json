@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "build": "docker build -t timothyjmiller/prisma-studio:latest .",
-    "publish": "docker build -t timothyjmiller/prisma-studio:latest --push ."
+    "publish": "docker push timothyjmiller/prisma-studio:latest"
   },
   "dependencies": {
     "@prisma/cli": "^2.13.0"
