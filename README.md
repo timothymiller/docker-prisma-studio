@@ -16,7 +16,7 @@ Share multiple database environments' access with colleagues. Deployed via Traef
 2. 🔒 100% [Docker Bench Security](https://github.com/docker/docker-bench-security) compliant
 3. 👨‍💻 Open source for open audits
 4. 📈 Regular updates
-5. 0️ Zero extra dependencies
+5. 0️ No extra dependencies
 
 ## 🖥️ Supported Architectures
 
