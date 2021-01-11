@@ -4,27 +4,38 @@ services:
     container_name: prisma-studio
     image: timothyjmiller/prisma-studio:latest
     restart: unless-stopped
-    env_file:
-     - .env
+    environment:
+      POSTGRES_URL: "postgresql://$POSTGRES_USERNAME:$POSTGRES_PASSWORD@$POSTGRES_IP_ADDRESS:$POSTGRES_DEFAULT_PORT/$POSTGRES_DATABASE"
     ports:
-      - ${PRISMA_STUDIO_PORT}:5555
-    healthcheck:
-      test: ["CMD-SHELL", "curl --fail http://localhost:${PRISMA_STUDIO_PORT}/ || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+      - ${PRISMA_STUDIO_PORT}:5555/tcp
+    networks:
+      traefik_proxy:
+        ipv4_address: $PRISMA_STUDIO_IP_ADDRESS
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prisma-studio-rtr.entrypoints=https"
+      - "traefik.http.routers.prisma-studio-rtr.tls=true"
+      - "traefik.http.routers.prisma-studio-rtr.rule=Host(`prisma-studio-${PROJECT_NAME}-${POSTGRES_DATABASE}.${DOMAIN_NAME}`)"
+      - "traefik.http.routers.prisma-studio-rtr.service=prisma-studio-svc"
+      - "traefik.http.services.prisma-studio-svc.loadbalancer.server.port=5555"
   postgres:
-    container_name: prisma-postgres
-    image: postgres:alpine
+    container_name: postgres
+    image: postgres:latest
     restart: always
-    env_file:
-     - .env
     ports:
       - ${POSTGRES_PORT}:5432
+    networks:
+      traefik_proxy:
+        ipv4_address: $POSTGRES_IP_ADDRESS
     volumes:
       - ${POSTGRES_PATH}/${PROJECT_NAME}/${POSTGRES_DATABASE}/:/var/lib/postgresql/data
+    environment:
+      POSTGRES_URL: "postgresql://$POSTGRES_USERNAME:$POSTGRES_PASSWORD@$POSTGRES_IP_ADDRESS:$POSTGRES_DEFAULT_PORT/$POSTGRES_DATABASE"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
+networks:
+  traefik_proxy:
+    external: true

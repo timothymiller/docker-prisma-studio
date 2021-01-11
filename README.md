@@ -1,15 +1,8 @@
-# 💾💿 Prisma Studio (for Docker)
+# 💾 Prisma Studio (for Docker)
 
 Access Prisma Studio through your web browser.
 
-## Best Security Practices
-
-- Host your different postgres environments in separate docker containers!
-- Share database access on a per environment basis
-
-Useful for sharing multiple database environments' access with colleagues. Can be deployed via Traefik for global access.
-
-For advanced deployments and/or consulting, [email me](mailto:contact@preparesoftware.com?subject=[GitHub%20Consulting]%20docker-prisma-studio) or [contact me on Discord](https://discord.gg/gtF4AX9UGA)
+Share multiple database environments' access with colleagues. Deployed via Traefik for global access.
 
 ## 📊 Stats
 
@@ -19,11 +12,11 @@ For advanced deployments and/or consulting, [email me](mailto:contact@preparesof
 
 ## ⁉️ How Private & Secure?
 
-1. Alpine Linux base image
-2. Docker runtime
-3. Open source for open audits
-4. Regular updates
-5. Zero extra dependencies
+1. 🪨 Stable Debian-slim base image
+2. 🔒 100% [Docker Bench Security](https://github.com/docker/docker-bench-security) compliant
+3. 👨‍💻 Open source for open audits
+4. 📈 Regular updates
+5. 0️ Zero extra dependencies
 
 ## 🖥️ Supported Architectures
 
@@ -41,6 +34,16 @@ Prisma Studio is then made available at the port specified to display your data 
 
 ## 👨‍💻 Deploying
 
+### ⚠️ Prerequisites
+
+#### Traefik v2 network
+
+Setting up an on-premise HTTPS reverse proxy requires knowledge of [Traefik v2](https://doc.traefik.io/traefik/)
+
+For help setting up an on-premise or cloud-agnostic HTTPS reverse proxy for Kubernetes, [email me](mailto:tim.miller@preparesoftware.com?subject=[GitHub%20Consulting]%20docker-prisma-studio) or [contact me on Discord](https://discord.gg/gtF4AX9UGA)
+
+### 🐋 Docker Compose
+
 Use the included docker-compose.yml file as a base for your installation.
 
 ```dockerfile
@@ -50,25 +53,41 @@ services:
     container_name: prisma-studio
     image: timothyjmiller/prisma-studio:latest
     restart: unless-stopped
-    env_file:
-     - .env
+    environment:
+      POSTGRES_URL: "postgresql://$POSTGRES_USERNAME:$POSTGRES_PASSWORD@$POSTGRES_IP_ADDRESS:$POSTGRES_DEFAULT_PORT/$POSTGRES_DATABASE"
     ports:
-      - ${PRISMA_STUDIO_PORT}:5555
+      - ${PRISMA_STUDIO_PORT}:5555/tcp
+    networks:
+      traefik_proxy:
+        ipv4_address: $PRISMA_STUDIO_IP_ADDRESS
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prisma-studio-rtr.entrypoints=https"
+      - "traefik.http.routers.prisma-studio-rtr.tls=true"
+      - "traefik.http.routers.prisma-studio-rtr.rule=Host(`prisma-studio-${PROJECT_NAME}-${POSTGRES_DATABASE}.${DOMAIN_NAME}`)"
+      - "traefik.http.routers.prisma-studio-rtr.service=prisma-studio-svc"
+      - "traefik.http.services.prisma-studio-svc.loadbalancer.server.port=5555"
   postgres:
-    container_name: prisma-postgres
-    image: postgres:alpine
+    container_name: postgres
+    image: postgres:latest
     restart: always
-    env_file:
-     - .env
     ports:
       - ${POSTGRES_PORT}:5432
+    networks:
+      traefik_proxy:
+        ipv4_address: $POSTGRES_IP_ADDRESS
     volumes:
       - ${POSTGRES_PATH}/${PROJECT_NAME}/${POSTGRES_DATABASE}/:/var/lib/postgresql/data
+    environment:
+      POSTGRES_URL: "postgresql://$POSTGRES_USERNAME:$POSTGRES_PASSWORD@$POSTGRES_IP_ADDRESS:$POSTGRES_DEFAULT_PORT/$POSTGRES_DATABASE"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 10s
       timeout: 5s
       retries: 5
+networks:
+  traefik_proxy:
+    external: true
 ```
 
 ## 📁 Environment Variables
@@ -92,11 +111,11 @@ PRISMA_STUDIO_PORT=5555
 POSTGRES_PATH=/postgres
 ```
 
-You may have to change the port numbers for postgres & Prisma Studio depending on the availability of your host machine.
+You may have to change the port numbers for ```Postgres``` & ```Prisma Studio``` depending on the availability of your host machine.
 
 ## ☁️ Enterprise Deployments
 
-For advanced deployments and/or consulting, [email me](mailto:contact@preparesoftware.com?subject=[GitHub%20Consulting]%20docker-prisma-studio) or [contact me on Discord](https://discord.gg/gtF4AX9UGA)
+For DevOps help setting up an on-premise or cloud-agnostic environment for software engineers, [email me](mailto:tim.miller@preparesoftware.com?subject=[GitHub%20Consulting]%20docker-prisma-studio) or [contact me on Discord](https://discord.gg/gtF4AX9UGA)
 
 Create three ```.env``` configs
 
