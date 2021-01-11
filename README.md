@@ -38,7 +38,7 @@ Prisma Studio is then made available at the port specified to display your data 
 
 #### Traefik v2 network
 
-Setting up an on-premise HTTPS reverse proxy requires knowledge of [Traefik v2](https://doc.traefik.io/traefik/)
+Setting up an on-premise HTTPS reverse proxy requires knowledge of [Traefik v2](https://doc.traefik.io/traefik/). [This is a great starting point](https://www.smarthomebeginner.com/cloudflare-settings-for-traefik-docker/).
 
 For help setting up an on-premise or cloud-agnostic HTTPS reverse proxy for Kubernetes, [email me](mailto:tim.miller@preparesoftware.com?subject=[GitHub%20Consulting]%20docker-prisma-studio) or [contact me on Discord](https://discord.gg/gtF4AX9UGA)
 
@@ -102,13 +102,18 @@ Make sure you securely generate new passwords for your postgres database for use
 
 ```bash
 PROJECT_NAME=demo-project
+DOMAIN_NAME=domain.com
 POSTGRES_DATABASE=development
 POSTGRES_HOST=postgres
+POSTGRES_PATH=/your/path/
 POSTGRES_USERNAME=postgres
 POSTGRES_PASSWORD=postgres
 POSTGRES_PORT=5432
+POSTGRES_DEFAULT_PORT=5432
+POSTGRES_IP_ADDRESS=192.168.254.20
 PRISMA_STUDIO_PORT=5555
-POSTGRES_PATH=/postgres
+PRISMA_STUDIO_IP_ADDRESS=192.168.254.21
+NETWORK_NAME=traefik_proxy
 ```
 
 You may have to change the port numbers for ```Postgres``` & ```Prisma Studio``` depending on the availability of your host machine.
@@ -116,6 +121,8 @@ You may have to change the port numbers for ```Postgres``` & ```Prisma Studio```
 ## ☁️ Enterprise Deployments
 
 For DevOps help setting up an on-premise or cloud-agnostic environment for software engineers, [email me](mailto:tim.miller@preparesoftware.com?subject=[GitHub%20Consulting]%20docker-prisma-studio) or [contact me on Discord](https://discord.gg/gtF4AX9UGA)
+
+For example, before deploying this in a production environment, you will want to setup Traefik middleware for authentication to limit database access.
 
 Create three ```.env``` configs
 
