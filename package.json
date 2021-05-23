@@ -8,9 +8,8 @@
   "private": true,
   "scripts": {
     "build": "docker build -t timothyjmiller/prisma-studio:latest .",
-    "dockerhub": "docker push timothyjmiller/prisma-studio:latest",
-    "build:all": "docker buildx build --platform linux/ppc64le,linux/s390x,linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/amd64 --tag timothyjmiller/prisma-studio:latest .",
-    "dockerhub:all": "docker buildx build --platform linux/ppc64le,linux/s390x,linux/arm/v6,linux/arm/v7,linux/arm64/v8,linux/amd64 --tag timothyjmiller/prisma-studio:latest --push ."
+    "check-updates": "yarn && yarn outdated",
+    "update-dependencies": "npx npm-check-updates -u && yarn"
   },
   "dependencies": {
     "prisma": "^2.23.0"
