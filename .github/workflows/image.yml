@@ -1,8 +1,8 @@
-name: Build cloudflare-ddns Docker image (multi-arch)
+name: Build Prisma Studio Docker image (multi-arch)
 
 on:
   push:
-    branches: master
+    branches: main
 
 jobs:
   build:
