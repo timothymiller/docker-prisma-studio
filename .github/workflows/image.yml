@@ -2,7 +2,7 @@ name: Build Prisma Studio Docker image (multi-arch)
 
 on:
   push:
-    branches: master
+    branches: main
 
 jobs:
   build:
