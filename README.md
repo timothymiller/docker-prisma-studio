@@ -1,6 +1,6 @@
 # 💾 Prisma Studio (for Docker)
 
-Access Prisma Studio through your web browser.
+Access Prisma Studio securely through your web browser.
 
 Share multiple database environments' access with colleagues. Deployed via Traefik for global access.
 
