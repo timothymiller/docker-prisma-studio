@@ -42,54 +42,6 @@ Setting up an on-premise HTTPS reverse proxy requires knowledge of [Traefik v2](
 
 For help setting up an on-premise or cloud-agnostic HTTPS reverse proxy for Kubernetes, [email me](mailto:tim.miller@preparesoftware.com?subject=[GitHub%20Consulting]%20docker-prisma-studio) or [contact me on Discord](https://discord.gg/gtF4AX9UGA)
 
-### 🐋 Docker Compose
-
-Use the included docker-compose.yml file as a base for your installation.
-
-```dockerfile
-version: '3.7'
-services:
-  prisma-studio:
-    container_name: prisma-studio
-    image: timothyjmiller/prisma-studio:latest
-    restart: unless-stopped
-    environment:
-      POSTGRES_URL: "postgresql://$POSTGRES_USERNAME:$POSTGRES_PASSWORD@$POSTGRES_IP_ADDRESS:$POSTGRES_DEFAULT_PORT/$POSTGRES_DATABASE"
-    ports:
-      - ${PRISMA_STUDIO_PORT}:5555/tcp
-    networks:
-      traefik_proxy:
-        ipv4_address: $PRISMA_STUDIO_IP_ADDRESS
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.prisma-studio-rtr.entrypoints=https"
-      - "traefik.http.routers.prisma-studio-rtr.tls=true"
-      - "traefik.http.routers.prisma-studio-rtr.rule=Host(`prisma-studio-${PROJECT_NAME}-${POSTGRES_DATABASE}.${DOMAIN_NAME}`)"
-      - "traefik.http.routers.prisma-studio-rtr.service=prisma-studio-svc"
-      - "traefik.http.services.prisma-studio-svc.loadbalancer.server.port=5555"
-  postgres:
-    container_name: postgres
-    image: postgres:latest
-    restart: always
-    ports:
-      - ${POSTGRES_PORT}:5432
-    networks:
-      traefik_proxy:
-        ipv4_address: $POSTGRES_IP_ADDRESS
-    volumes:
-      - ${POSTGRES_PATH}/${PROJECT_NAME}/${POSTGRES_DATABASE}/:/var/lib/postgresql/data
-    environment:
-      POSTGRES_URL: "postgresql://$POSTGRES_USERNAME:$POSTGRES_PASSWORD@$POSTGRES_IP_ADDRESS:$POSTGRES_DEFAULT_PORT/$POSTGRES_DATABASE"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-networks:
-  traefik_proxy:
-    external: true
-```
-
 ## 📁 Environment Variables
 
 ### ⚠️ Warning
