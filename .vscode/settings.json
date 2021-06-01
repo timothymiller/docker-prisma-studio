@@ -8,7 +8,8 @@
     "node_modules": true,
     ".vscode": true,
     ".gitignore": true,
-    "LICENSE": true
+    "LICENSE": true,
+    ".github": true
   },
   "explorerExclude.backup": null
 }
