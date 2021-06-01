@@ -9,7 +9,8 @@
     ".vscode": true,
     ".gitignore": true,
     "LICENSE": true,
-    ".github": true
+    ".github": true,
+    "yarn.lock": true
   },
   "explorerExclude.backup": null
 }
