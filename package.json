@@ -1,6 +1,6 @@
 {
   "name": "docker-prisma-studio",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "SQL Database Web UI for the 21st century.",
   "repository": "https://github.com/timothymiller/docker-prisma-studio.git",
   "author": "tim.miller@preparesoftware.com",
@@ -12,11 +12,11 @@
     "update-dependencies": "npx npm-check-updates -u && yarn"
   },
   "dependencies": {
-    "@prisma/client": "^2.25.0",
-    "prisma": "^2.25.0"
+    "@prisma/client": "^2.24.0",
+    "prisma": "^2.24.0"
   },
   "devDependencies": {
-    "@prisma/client": "^2.25.0",
-    "prisma": "^2.25.0"
+    "@prisma/client": "^2.24.0",
+    "prisma": "^2.24.0"
   }
 }
