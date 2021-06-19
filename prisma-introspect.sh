@@ -2,7 +2,7 @@
 node_modules/.bin/prisma introspect || cat <<EOF > schema.prisma
 datasource db {
   provider = "postgresql"
-  url      = env("POSTGRES_URL")
+  url      = env("DATABASE_URL")
 }
 generator client {
   provider = "prisma-client-js"
