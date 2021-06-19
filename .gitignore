@@ -23,3 +23,4 @@ lerna-debug.log*
 
 # dotenv environment variables file
 .env
+schema.prisma
