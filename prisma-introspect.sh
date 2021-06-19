@@ -1,5 +1,5 @@
 #!/bin/sh
-node_modules/.bin/prisma introspect || cat <<EOF > schema.prisma
+node_modules/.bin/prisma introspect --url $DATABASE_URL || cat <<EOF > schema.prisma
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
