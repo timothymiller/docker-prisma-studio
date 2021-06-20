@@ -18,13 +18,5 @@ FROM base AS release
 COPY --from=dependencies /production_node_modules ./node_modules
 COPY prisma-introspect.sh .
 RUN chmod +x prisma-introspect.sh
-# default environment variables
-ENV POSTGRES_DATABASE "data"
-ENV POSTGRES_HOST "postgres"
-ENV POSTGRES_PASSWORD "postgres"
-ENV POSTGRES_PORT 5432
-ENV PRISMA_STUDIO_PORT 5555
-ENV POSTGRES_USERNAME "postgres"
-ENV POSTGRES_URL "postgresql://$POSTGRES_USERNAME:$POSTGRES_PASSWORD@$POSTGRES_HOST:$POSTGRES_PORT/$POSTGRES_DATABASE?schema=data"
 EXPOSE $PRISMA_STUDIO_PORT
 ENTRYPOINT ["/bin/sh", "prisma-introspect.sh"]
