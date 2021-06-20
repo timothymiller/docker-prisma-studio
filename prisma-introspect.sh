@@ -1,5 +1,5 @@
 #!/bin/sh
-rm schema.prisma
+rm -f schema.prisma
 cat <<EOF > schema.prisma
 datasource db {
   provider = "postgresql"
