@@ -3,7 +3,7 @@ rm schema.prisma
 cat <<EOF > schema.prisma
 datasource db {
   provider = "postgresql"
-  url      = env("PRISMA_DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 generator client {
   provider = "prisma-client-js"
