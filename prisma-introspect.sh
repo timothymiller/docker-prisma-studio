@@ -10,5 +10,5 @@ generator client {
 }
 EOF
 node_modules/.bin/prisma introspect
-node_modules/.bin/prisma generate
+# node_modules/.bin/prisma generate
 exec node_modules/.bin/prisma studio
