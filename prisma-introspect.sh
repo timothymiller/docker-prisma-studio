@@ -1,8 +1,8 @@
 #!/bin/sh
-node_modules/.bin/prisma introspect --url $DATABASE_URL || cat <<EOF > schema.prisma
+node_modules/.bin/prisma introspect --url $PRISMA_DATABASE_URL || cat <<EOF > schema.prisma
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url      = env("PRISMA_DATABASE_URL")
 }
 generator client {
   provider = "prisma-client-js"
