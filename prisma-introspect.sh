@@ -9,5 +9,5 @@ generator client {
   provider = "prisma-client-js"
 }
 EOF
-node_modules/.bin/prisma introspect
+node_modules/.bin/prisma db pull
 exec node_modules/.bin/prisma studio
