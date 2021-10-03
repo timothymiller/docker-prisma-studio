@@ -1,8 +1,8 @@
 # ---- Base Node ----
-FROM node:16-alpine AS base
-RUN apk update
-RUN apk add openssl
-LABEL image=timothyjmiller/prisma-studio:latest \
+FROM node:16-slim AS base
+RUN apt-get update
+RUN apt-get install openssl
+LABEL image=prisma-studio:latest \
   maintainer="Timothy Miller <tim.miller@preparesoftware.com>" \
   base=debian
 
