@@ -12,6 +12,6 @@
     "update-dependencies": "npx npm-check-updates -u && yarn"
   },
   "dependencies": {
-    "prisma": "^2.30.0"
+    "prisma": "3.3.0"
   }
 }
