@@ -20,11 +20,7 @@ Share multiple database environments' access with colleagues. Deployed via Traef
 
 ## 🖥️ Supported Architectures
 
-At the time of this writing, @prisma/cli only supports AMD64
-
-ARM64 support will come shortly after Prisma officially supports it.
-
-[Relevant Github Issue](https://github.com/prisma/prisma/issues/861)
+ARM64, ARMv7, x86, x64, PPC
 
 ## How it Works
 
