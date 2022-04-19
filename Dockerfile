@@ -14,7 +14,7 @@ COPY *.lock ./
 
 RUN npm set progress=false && npm config set depth 0
 RUN npm install --only=production
- 
+
 #
 # ---- Release ----
 FROM base AS release

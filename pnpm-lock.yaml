@@ -1,23 +1,23 @@
 lockfileVersion: 5.3
 
 specifiers:
-  prisma: ~3.9.2
+  prisma: ~3.12.0
 
 dependencies:
-  prisma: 3.9.2
+  prisma: 3.12.0
 
 packages:
 
-  /@prisma/engines/3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009:
-    resolution: {integrity: sha512-qM+uJbkelB21bnK44gYE049YTHIjHysOuj0mj5U2gDGyNLfmiazlggzFPCgEjgme4U5YB2tYs6Z5Hq08Kl8pjA==}
+  /@prisma/engines/3.12.0-37.22b822189f46ef0dc5c5b503368d1bee01213980:
+    resolution: {integrity: sha512-zULjkN8yhzS7B3yeEz4aIym4E2w1ChrV12i14pht3ePFufvsAvBSoZ+tuXMvfSoNTgBS5E4bolRzLbMmbwkkMQ==}
     requiresBuild: true
     dev: false
 
-  /prisma/3.9.2:
-    resolution: {integrity: sha512-i9eK6cexV74OgeWaH3+e6S07kvC9jEZTl6BqtBH398nlCU0tck7mE9dicY6YQd+euvMjjCtY89q4NgmaPnUsSg==}
+  /prisma/3.12.0:
+    resolution: {integrity: sha512-ltCMZAx1i0i9xuPM692Srj8McC665h6E5RqJom999sjtVSccHSD8Z+HSdBN2183h9PJKvC5dapkn78dd0NWMBg==}
     engines: {node: '>=12.6'}
     hasBin: true
     requiresBuild: true
     dependencies:
-      '@prisma/engines': 3.9.0-58.bcc2ff906db47790ee902e7bbc76d7ffb1893009
+      '@prisma/engines': 3.12.0-37.22b822189f46ef0dc5c5b503368d1bee01213980
     dev: false
