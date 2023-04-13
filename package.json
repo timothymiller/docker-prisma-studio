@@ -6,7 +6,7 @@
   "author": "tim.miller@preparesoftware.com",
   "license": "GPLv3",
   "dependencies": {
-    "prisma": "~3.12.0"
+    "prisma": "~4.12.0"
   },
   "scripts": {
     "docker-build": "docker build -t timothyjmiller/prisma-studio:latest .",
